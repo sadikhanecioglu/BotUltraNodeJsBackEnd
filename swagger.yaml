@@ -1,0 +1,822 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Bot Ultra
+  description: >
+    Nodejs BackEnd for Bot Ultra.
+tags:
+  - name: auth
+  - name: task
+  - name: user
+
+schemes:
+  - http
+  - https
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+paths:
+  /api/auth/login:
+    post:
+      summary: Login System
+      tags:
+        - auth
+      parameters:
+        - in: body
+          name: body
+          description: Login need object
+          required: false
+          schema:
+            $ref: "#/definitions/Login"
+      responses:
+        "200":
+          description: "Login Result"
+
+  /api/auth/register:
+    post:
+      summary: Register System
+      tags:
+        - auth
+      parameters:
+        - in: body
+          name: body
+          description: Register need object
+          required: false
+          schema:
+            $ref: "#/definitions/Register"
+      responses:
+        "200":
+          description: "Register Result"
+
+  /api/auth/me:
+    get:
+      summary: get current user informations
+      tags:
+        - auth
+      security:
+        - Bearer: []
+      responses:
+        "200":
+          description: "Me Complate"
+        "403":
+          description: "You do not have necessary permissions for the resource"
+
+  /api/auth/logout:
+    get:
+      summary: Logout System
+      tags:
+        - auth
+      security:
+        - Bearer: []
+      responses:
+        "200":
+          description: "Logout Complate"
+        "403":
+          description: "You do not have necessary permissions for the resource"
+
+  /api/auth/convertlink/{id}:
+    get:
+      summary: get  macth link
+      tags:
+        - auth
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+      responses:
+        "200":
+          description: "Match Result"
+        "403":
+          description: "You do not have necessary permissions for the resource"
+
+  /api/task:
+    post:
+      summary: Created New Task
+      tags:
+        - task
+      security:
+        - Bearer: []
+
+      parameters:
+        - in: body
+          name: body
+          description: Register need object
+          required: false
+          schema:
+            $ref: "#/definitions/Task"
+      responses:
+        "200":
+          description: "Task Result"
+        "403":
+          description: "You do not have necessary permissions for the resource"
+
+    get:
+      summary: get all task for user
+      tags:
+        - task
+      security:
+        - Bearer: []
+      responses:
+        "200":
+          description: "Task Result"
+        "403":
+          description: "You do not have necessary permissions for the resource"
+
+    put:
+      summary: update task
+      tags:
+        - task
+      security:
+        - Bearer: []
+      parameters:
+        - in: body
+          name: body
+          description: Register need object
+          required: false
+          schema:
+            $ref: "#/definitions/Task"
+      responses:
+        "200":
+          description: "Task Result"
+        "403":
+          description: "You do not have necessary permissions for the resource"
+
+  /api/task/{id}:
+    get:
+      summary: get  task for user
+      tags:
+        - task
+      security:
+        - Bearer: []
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+      responses:
+        "200":
+          description: "Task Result"
+        "403":
+          description: "You do not have necessary permissions for the resource"
+    delete:
+      summary: delete task
+      tags:
+        - task
+      security:
+        - Bearer: []
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+      responses:
+        "200":
+          description: "Task Delete Result"
+        "403":
+          description: "You do not have necessary permissions for the resource"
+
+  /api/admin/user:
+    post:
+      summary: Created New User
+      tags:
+        - user
+      security:
+        - Bearer: []
+
+      parameters:
+        - in: body
+          name: body
+          description: Register need object
+          required: false
+          schema:
+            $ref: "#/definitions/User"
+      responses:
+        "200":
+          description: "User Result"
+        "403":
+          description: "You do not have necessary permissions for the resource"
+
+    get:
+      summary: get all users
+      tags:
+        - user
+      security:
+        - Bearer: []
+      parameters:
+        - name: pageindex
+          in: query
+          description: current pageindex
+          required: false
+          type: number
+        - name: pagesize
+          in: query
+          description: total page size
+          required: false
+          type: number
+      responses:
+        "200":
+          description: "User Result"
+        "403":
+          description: "You do not have necessary permissions for the resource"
+
+    put:
+      summary: update user
+      tags:
+        - user
+      security:
+        - Bearer: []
+      parameters:
+        - in: body
+          name: body
+          description: Register need object
+          required: false
+          schema:
+            $ref: "#/definitions/User"
+      responses:
+        "200":
+          description: "User Result"
+        "403":
+          description: "You do not have necessary permissions for the resource"
+
+  /api/admin/user/{id}:
+    get:
+      summary: Get user
+      tags:
+        - user
+      security:
+        - Bearer: []
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+      responses:
+        "200":
+          description: "User Result"
+        "403":
+          description: "You do not have necessary permissions for the resource"
+    delete:
+      summary: delete user
+      tags:
+        - user
+      security:
+        - Bearer: []
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+      responses:
+        "200":
+          description: "User Result"
+        "403":
+          description: "You do not have necessary permissions for the resource"
+
+  /api/zyngabot:
+    post:
+      summary: Created New Zynga Bot
+      tags:
+        - zynga
+      security:
+        - Bearer: []
+
+      parameters:
+        - in: body
+          name: body
+          description: Register need object
+          required: false
+          schema:
+            $ref: "#/definitions/ZyngaBot"
+      responses:
+        "200":
+          description: "zynga Result"
+        "403":
+          description: "You do not have necessary permissions for the resource"
+
+    get:
+      summary: get all zynga for user
+      tags:
+        - zynga
+      security:
+        - Bearer: []
+      responses:
+        "200":
+          description: "zynga Result"
+        "403":
+          description: "You do not have necessary permissions for the resource"
+
+    put:
+      summary: update zynga
+      tags:
+        - zynga
+      security:
+        - Bearer: []
+      parameters:
+        - in: body
+          name: body
+          description: Register need object
+          required: false
+          schema:
+            $ref: "#/definitions/ZyngaBot"
+      responses:
+        "200":
+          description: "zynga Result"
+        "403":
+          description: "You do not have necessary permissions for the resource"
+
+  /api/zyngabot/{id}:
+    get:
+      summary: get  zyngabot for id
+      tags:
+        - zynga
+      security:
+        - Bearer: []
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+      responses:
+        "200":
+          description: "zynga Result"
+        "403":
+          description: "You do not have necessary permissions for the resource"
+    delete:
+      summary: delete zynga
+      tags:
+        - zynga
+      security:
+        - Bearer: []
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+      responses:
+        "200":
+          description: "zynga Delete Result"
+        "403":
+          description: "You do not have necessary permissions for the resource"
+
+  /api/zyngabot/images/{id}:
+    get:
+      summary: get  zyngabot image for id
+      tags:
+        - zynga
+      security:
+        - Bearer: []
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+      responses:
+        "200":
+          description: "zynga Result"
+        "403":
+          description: "You do not have necessary permissions for the resource"
+    delete:
+      summary: delete zynga
+      tags:
+        - zynga
+      security:
+        - Bearer: []
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+      responses:
+        "200":
+          description: "zynga Delete Result"
+        "403":
+          description: "You do not have necessary permissions for the resource"
+
+  /api/zyngabot/bot/command:
+    post:
+      summary: Post Bot Command
+      tags:
+        - zynga
+      security:
+        - Bearer: []
+
+      parameters:
+        - in: body
+          name: body
+          description: Post Bot Command
+          required: false
+          schema:
+            $ref: "#/definitions/ZyngaCommand"
+      responses:
+        "200":
+          description: "Task Result"
+        "403":
+          description: "You do not have necessary permissions for the resource"
+
+  /api/servermanagment:
+    post:
+      summary: Created New Server
+      tags:
+        - server
+      security:
+        - Bearer: [] 
+
+      parameters:
+        - in: body
+          name: body
+          description: Register need object
+          required: false
+          schema:
+            $ref: "#/definitions/Server"
+      responses:
+        "200":
+          description: "Server Result"
+        "403":
+          description: "You do not have necessary permissions for the resource"
+    get:
+      summary: get all task for user
+      tags:
+        - server
+      security:
+        - Bearer: []
+      responses:
+        "200":
+          description: "server Result"
+        "403":
+          description: "You do not have necessary permissions for the resource"
+
+    put:
+      summary: update server
+      tags:
+        - server
+      security:
+        - Bearer: []
+      parameters:
+        - in: body
+          name: body
+          description: Register need object
+          required: false
+          schema:
+            $ref: "#/definitions/Server"
+      responses:
+        "200":
+          description: "server Result"
+        "403":
+          description: "You do not have necessary permissions for the resource" 
+
+  /api/playistmanagment:
+    post:
+      summary: Created New playist
+      tags:
+        - playist
+      security:
+        - Bearer: [] 
+
+      parameters:
+        - in: body
+          name: body
+          description: Register need object
+          required: false
+          schema:
+            $ref: "#/definitions/StreamPlayist"
+      responses:
+        "200":
+          description: "playist Result"
+        "403":
+          description: "You do not have necessary permissions for the resource"
+    get:
+      summary: get all task for user
+      tags:
+        - playist
+      security:
+        - Bearer: []
+      responses:
+        "200":
+          description: "playist Result"
+        "403":
+          description: "You do not have necessary permissions for the resource"
+
+    put:
+      summary: update playist
+      tags:
+        - playist
+      security:
+        - Bearer: []
+      parameters:
+        - in: body
+          name: body
+          description: Register need object
+          required: false
+          schema:
+            $ref: "#/definitions/StreamPlayist"
+      responses:
+        "200":
+          description: "playist Result"
+        "403":
+          description: "You do not have necessary permissions for the resource" 
+
+  /api/playistmanagment/get/search:
+    post:
+      summary: Playist Get
+      tags:
+        - playist
+      security:
+        - Bearer: []
+
+      parameters:
+        - in: body
+          name: body
+          description: Playist Get
+          required: false
+          schema:
+            $ref: "#/definitions/StreamPlayistSearch"
+      responses:
+        "200":
+          description: "Playist Result"
+        "403":
+          description: "You do not have necessary permissions for the resource"
+
+
+
+  /api/servercommand:
+    post:
+      summary: Post Bot Command
+      tags:
+        - servercommand
+      security:
+        - Bearer: []
+
+      parameters:
+        - in: body
+          name: body
+          description: Post Bot Command
+          required: false
+          schema:
+            $ref: "#/definitions/ServerCommand"
+      responses:
+        "200":
+          description: "servercommand Result"
+        "403":
+          description: "You do not have necessary permissions for the resource"
+
+definitions:
+  Login:
+    type: object
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    example:
+      email: superadmin@nodejsbackend.com
+      password: "1234"
+
+  Register:
+    type: object
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+      name:
+        type: string
+    example:
+      email: superadmin@nodejsbackend.com
+      password: "1234"
+      name: superadmin
+
+  Task:
+    type: object
+    properties:
+      name:
+        type: string
+      description:
+        type: string
+      createddate:
+        type: string
+        format: date-time
+      status:
+        type: number
+      sourceid:
+        type: string
+      source:
+        type: string
+      lastrundate:
+        type: string
+        format: date-time
+      lastcomplatedate:
+        type: string
+        format: date-time
+      sessioninfo:
+        type: object
+        $ref: "#/definitions/TaskSessionInfo"
+      exportinfo:
+        type: object
+      isactive:
+        type: boolean
+    example:
+      name: deneme task
+      description: deneme task description
+      status: 0
+      sessioninfo:
+        url: http://google.com
+        drivertype: 1
+        cron: "* 1 * * *"
+        pageloadtimeout: 1900
+        hub: http://85.195.119.205:4444/wd/hub
+        waitqueroutingkey: nodejs.bot.testlisten
+        process:
+          - processtype: 0
+            action: return 1
+            runafterwaittime: 0
+      exportinfo:
+        exporttype: 1
+        options:
+          format: json
+          alwaysoverwrite: true
+      isactive: true
+
+  TaskSessionInfo:
+    type: object
+    properties:
+      url:
+        type: string
+      drivertype:
+        type: number
+      pageloadtimeout:
+        type: number
+      cron:
+        type: string
+      hub:
+        type: string
+      waitqueroutingkey:
+        type: string
+      sendroutingkey:
+        type: string
+      process:
+        type: array
+        items:
+          type: object
+          $ref: "#/definitions/TaskSessionProcess"
+    example:
+      url: http://google.com
+
+  TaskSessionProcess:
+    type: object
+    properties:
+      processtype:
+        type: number
+      action:
+        type: string
+      runafterwaittime:
+        type: number
+
+  User:
+    type: object
+    properties:
+      name:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+      phone:
+        type: string
+      roles:
+        type: array
+        items:
+          type: string
+      lastloginip:
+        type: string
+
+  ZyngaBot:
+    type: object
+    properties:
+      name:
+        type: string
+      description:
+        type: string
+      createddate:
+        type: string
+        format: date-time
+      status:
+        type: number
+      isactive:
+        type: boolean
+      loginusername:
+        type: string
+      loginpassword:
+        type: string
+    example:
+      name: deneme zynga botu
+      description: demoilhan
+      status: 0
+      isactive: true
+
+  ZyngaCommand:
+    type: object
+    properties:
+      destbotid:
+        type: string
+      sourceusername:
+        type: string
+      sourcepassword:
+        type: string
+      sendblance:
+        type: string
+    example:
+      destbotid: ""
+      sourceusername: ""
+      sourcepassword: ""
+      sendblance: ""
+
+  Server:
+    type: object
+    properties:
+      name:
+        type: string
+      description:
+        type: string
+      type:
+        type : number
+      status:
+        type: number
+      ip:
+        type: string
+      username:
+        type: string
+      password:
+        type: string
+      isactive:
+        type: boolean
+    example:
+      name: "Selenium-01-Bulten"
+      description: "description"
+      type: 1
+      ip: "172.16.5.21"
+      username: "goadmin"
+      password: "1234qqqQ"
+      isactive: true
+  
+  ServerCommand:
+    type: object
+    properties:
+      serverid:
+        type: string
+      runtype:
+        type: number
+      command:
+        type: string
+      parameter:
+        type: string
+    example:
+      serverid: "6085c7f68b3bd93a046eb490"
+      runtype: 1
+      command: "bulletincommand"
+      parameter: ""
+  
+  StreamPlayistSearch:
+    type: object
+    properties:
+      name:
+        type: string
+      streamurl:
+        type: string
+      isactive:
+        type: boolean
+    example:
+      name: "beinsport1"
+      streamurl: ""
+      isactive: true
+
+    StreamPlayist:
+    type: object
+    properties:
+      name:
+        type: string
+      streamurl:
+        type: string
+      outputservers:
+        type: array
+        items:
+          type: object
+          $ref: "#/definitions/StreamOutputServer"
+      isactive:
+        type: boolean
+    example:
+      name: "beinsport1"
+      streamurl: "https://jhn.testfilex.cloud/hlslive/190.m3u8"
+      outputservers:
+        - url: "rtmp://172.16.5.22:1935/show/bsport1"
+      isactive: true
+  
+  StreamOutputServer:
+    type: object
+    properties:
+      url: string
+    example:
+      url: "rtmp://172.16.5.22:1935/show/bsport1"
+      
