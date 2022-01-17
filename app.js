@@ -59,5 +59,7 @@ app.use("/api/servercommand", ServerControlController);
 var PlayistController = require(__root + "video_stream/PlayistController");
 app.use("/api/playistmanagment", PlayistController);
 
+const ProxyController = require(__root+"proxy/LinkProxyController");
+app.use("/api/proxy",ProxyController);
 
 module.exports = app;
