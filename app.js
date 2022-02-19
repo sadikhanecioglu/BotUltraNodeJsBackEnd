@@ -6,26 +6,26 @@ global.__root = __dirname + "/";
 const cors = require("cors");
 const whitelist = ["http://localhost:4200", "http://localhost:3000"];
 const corsOptions = {
-  credentials: true, // This is important.
-  origin: (origin, callback) => {
-    console.log(origin);
-    if (whitelist.includes(origin)) return callback(null, true);
+    credentials: true, // This is important.
+    origin: (origin, callback) => {
+        console.log(origin);
+        if (whitelist.includes(origin)) return callback(null, true);
 
-    callback(new Error("Not allowed by CORS"));
-  },
+        callback(new Error("Not allowed by CORS"));
+    },
 };
 
 app.use(cors());
 
 //app.options('*', cors());
 
-app.get("/api", function (req, res) {
-  res.status(200).send("API works.");
+app.get("/api", function(req, res) {
+    res.status(200).send("API works.");
 });
 
-app.post("/api", function (req, res) {
-  console.log(req.body);
-  res.status(200).send(req.body);
+app.post("/api", function(req, res) {
+    console.log(req.body);
+    res.status(200).send(req.body);
 });
 
 var swaggerUi = require("swagger-ui-express");
@@ -59,7 +59,10 @@ app.use("/api/servercommand", ServerControlController);
 var PlayistController = require(__root + "video_stream/PlayistController");
 app.use("/api/playistmanagment", PlayistController);
 
-const ProxyController = require(__root+"proxy/LinkProxyController");
-app.use("/api/proxy",ProxyController);
+const ProxyController = require(__root + "proxy/LinkProxyController");
+app.use("/api/proxy", ProxyController);
+
+const TrackerController = require(__root + "tracker/TrackerController");
+app.use("/tracker", TrackerController);
 
 module.exports = app;

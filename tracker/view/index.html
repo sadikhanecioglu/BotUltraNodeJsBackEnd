@@ -1,0 +1,42 @@
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <script>
+        var el = document.createElement('script');
+        el.type = "text/javascript";
+        el.onload = function() {
+
+            const brId = getUrlParameter("id");
+
+            var lmtsOptions = {
+                matchId: brId,
+                container: '#live_tracker'
+            };
+            SRLive.addWidget({
+                name: 'widgets.lmts',
+                config: lmtsOptions,
+                callback: function() {
+                    setTimeout(function() {
+
+                    }, 1000);
+                }
+            });
+        };
+        el.src = "https://m.cornerdecks.com/min/live.widget.js";
+        document.getElementsByTagName('head')[0].appendChild(el);
+
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        };
+    </script>
+    <div id="live_tracker"></div>
+</body>
+
+</html>

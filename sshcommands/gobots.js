@@ -587,7 +587,7 @@ const LiveBotCommand = function({ category, botIndex, botCount }) {
     screens=$(screen -ls | grep [{0-9}]*.$isim${category}${botIndex} | grep -v grep | grep \\) | awk '{print $1}' | grep -o '[[:digit:]].[[:digit:]]*')
     screen -S "$isim${category}${botIndex}" -X quit
     sleep 0.5
-    pgorev='\\"^?cd;cd GoHost/GoBot;python3 starter.py -bot "'${category}x${botIndex}x10'" -type SplitLiveBot -time 60 -headless 1 -url  https://bahigo.com/tr/canli-bahis -amq 192.168.2.31 -amqHost BetGoDev -hub http://localhost:4444/wd/hub \\n\\"^?'
+    pgorev='\\"^?cd;cd GoHost/GoBot;python3 starter.py -bot "'${category}x${botIndex}x10'" -type SplitLiveBot -time 60 -headless 1 -url  https://bahigo.com/tr/canli-bahis -amq 192.168.2.31 -amqHost BetGoDevTest -hub http://localhost:4444/wd/hub \\n\\"^?'
     screen -dmS "$isim${category}${botIndex}"
     sleep 1
     komut="screen -S "$isim${category}${botIndex}" -X stuff $pgorev"
