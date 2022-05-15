@@ -59,7 +59,24 @@ const bulletincommand = () => {
             komut="screen -S "$isim" -X stuff $pgorev"
             $komut
             
-            sleep 3 */
+            sleep 3 
+            
+                        # Reset Bahigo Futbol Special
+            isim="bahigofutbolprespecial"
+            screens=$(screen -ls | grep [{0-9}]*.$isim | grep -v grep | grep \\) | awk '{print $1}' | grep -o '[[:digit:]].[[:digit:]]*')
+            screen -S "$isim" -X quit
+            sleep 0.5
+            pgorev='\\"^?cd;cd GoHost/GoBot;python3 starter.py -type RivaloSplitSpecialPreBot -headless 1 -rbc soccer -ps 8500 --url http://bahigo.com -amq 192.168.2.31 -amqHost BetGoDev -hub http://localhost:4444/wd/hub \\n\\"^?'
+            screen -dmS "$isim"
+            sleep 1
+            komut="screen -S "$isim" -X stuff $pgorev"
+            $komut
+            
+            sleep 1   
+            
+            
+            
+            */
     file = `#!/bin/bash
 
             # Reset Tipco Futbol Bulletin
@@ -101,18 +118,9 @@ const bulletincommand = () => {
             
             sleep 1
 
-            # Reset TipBet Scpecial Bulletin
-            isim="TipBetSpecialBulletin"
-            screens=$(screen -ls | grep [{0-9}]*.$isim | grep -v grep | grep \\) | awk '{print $1}' | grep -o '[[:digit:]].[[:digit:]]*')
-            screen -S "$isim" -X quit
-            sleep 0.5
-            pgorev='\\"^?cd;cd GoHost/GoBot;python3 starter.py -type TipBetBulletinBot -headless 1  -amq 192.168.2.31 -amqHost BetGoDev -hub http://localhost:4444/wd/hub -rbc Futbol \\n\\"^?'
-            screen -dmS "$isim"
-            sleep 1
-            komut="screen -S "$isim" -X stuff $pgorev"
-            $komut
-            
-            sleep 1
+         
+
+
 
           `;
 
@@ -132,6 +140,124 @@ const bulletincommand = () => {
       
       sleep 1
 
+      
+
+            # Reset TipBet Scpecial Bulletin
+            isim="TipBetSpecialBulletin"
+            screens=$(screen -ls | grep [{0-9}]*.$isim | grep -v grep | grep \\) | awk '{print $1}' | grep -o '[[:digit:]].[[:digit:]]*')
+            screen -S "$isim" -X quit
+            sleep 0.5
+            pgorev='\\"^?cd;cd GoHost/GoBot;python3 starter.py -type TipBetBulletinBot -headless 1  -amq 192.168.2.31 -amqHost BetGoDev -hub http://localhost:4444/wd/hub -rbc Futbol \\n\\"^?'
+            screen -dmS "$isim"
+            sleep 1
+            komut="screen -S "$isim" -X stuff $pgorev"
+            $komut
+            
+            sleep 1
+    */
+    var b64File = Buffer.from(file).toString("base64");
+    var restartFile = "";
+    restartFile = "screen -ls;";
+    restartFile += "echo -e '" + b64File + "' | base64 --decode | bash -s -l;";
+    restartFile += "screen -ls";
+    console.log(restartFile);
+
+    return restartFile;
+};
+
+const bahigoBulletincommand = () => {
+    var file = "";
+    /*  # Reset Selenium
+            isim="selenium"
+            screens=$(screen -ls | grep [{0-9}]*.$isim | grep -v grep | grep \\) | awk '{print $1}' | grep -o '[[:digit:]].[[:digit:]]*')
+            screen -S "$isim" -X quit
+            sleep 0.5
+            pgorev='\\"^?cd;cd selenium;java -jar selenium-server-standalone-3.141.59.jar\\n\\"^?'
+            screen -dmS "$isim"
+            sleep 1
+            komut="screen -S "$isim" -X stuff $pgorev"
+            $komut
+            
+            sleep 3 
+            
+            # Reset Bahigo Futbol Special
+            isim="bahigofutbolprespecial"
+            screens=$(screen -ls | grep [{0-9}]*.$isim | grep -v grep | grep \\) | awk '{print $1}' | grep -o '[[:digit:]].[[:digit:]]*')
+            screen -S "$isim" -X quit
+            sleep 0.5
+            pgorev='\\"^?cd;cd GoHost/GoBot;python3 starter.py -type RivaloSplitSpecialPreBot -headless 1 -rbc soccer -ps 8500 --url http://bahigo.com -amq 192.168.2.31 -amqHost BetGoDev -hub http://localhost:4444/wd/hub \\n\\"^?'
+            screen -dmS "$isim"
+            sleep 1
+            komut="screen -S "$isim" -X stuff $pgorev"
+            $komut
+            
+            sleep 1   
+            
+            
+            
+            */
+    file = `#!/bin/bash
+
+            # Reset Bahigo Futbol Special
+            isim="bahigofutbolprespecial"
+            screens=$(screen -ls | grep [{0-9}]*.$isim | grep -v grep | grep \\) | awk '{print $1}' | grep -o '[[:digit:]].[[:digit:]]*')
+            screen -S "$isim" -X quit
+            sleep 0.5
+            pgorev='\\"^?cd;cd GoHost/GoBot;python3 starter.py -type RivaloSplitSpecialPreBot -headless 0 -rbc soccer -ps 8500 --url http://bahigo.com -amq 192.168.2.31 -amqHost BetGoDev -hub http://localhost:4444/wd/hub \\n\\"^?'
+            screen -dmS "$isim"
+            sleep 1
+            komut="screen -S "$isim" -X stuff $pgorev"
+            $komut
+            
+            sleep 1  
+
+            # Reset Bahigo Basketbol Special
+            isim="bahigobasketbolprespecial"
+            screens=$(screen -ls | grep [{0-9}]*.$isim | grep -v grep | grep \\) | awk '{print $1}' | grep -o '[[:digit:]].[[:digit:]]*')
+            screen -S "$isim" -X quit
+            sleep 0.5
+            pgorev='\\"^?cd;cd GoHost/GoBot;python3 starter.py -type RivaloSplitSpecialPreBot -headless 0 -rbc basketball -ps 8500 --url http://bahigo.com -amq 192.168.2.31 -amqHost BetGoDev -hub http://localhost:4444/wd/hub \\n\\"^?'
+            screen -dmS "$isim"
+            sleep 1
+            komut="screen -S "$isim" -X stuff $pgorev"
+            $komut
+            
+            sleep 1  
+
+
+
+          `;
+
+    /*
+          
+          
+      # Reset TipBet Scpecial Bulletin
+      isim="TipBetSpecialBulletin"
+      screens=$(screen -ls | grep [{0-9}]*.$isim | grep -v grep | grep \\) | awk '{print $1}' | grep -o '[[:digit:]].[[:digit:]]*')
+      screen -S "$isim" -X quit
+      sleep 0.5
+      pgorev='\\"^?cd;cd GoHost/GoBot;python3 starter.py -type TipBetBulletinBot -headless 1  -amq 192.168.2.31 -amqHost BetGoDev -hub http://localhost:4444/wd/hub -rbc Futbol \\n\\"^?'
+      screen -dmS "$isim"
+      sleep 1
+      komut="screen -S "$isim" -X stuff $pgorev"
+      $komut
+      
+      sleep 1
+
+      
+
+            # Reset TipBet Scpecial Bulletin
+            isim="TipBetSpecialBulletin"
+            screens=$(screen -ls | grep [{0-9}]*.$isim | grep -v grep | grep \\) | awk '{print $1}' | grep -o '[[:digit:]].[[:digit:]]*')
+            screen -S "$isim" -X quit
+            sleep 0.5
+            pgorev='\\"^?cd;cd GoHost/GoBot;python3 starter.py -type TipBetBulletinBot -headless 1  -amq 192.168.2.31 -amqHost BetGoDev -hub http://localhost:4444/wd/hub -rbc Futbol \\n\\"^?'
+            screen -dmS "$isim"
+            sleep 1
+            komut="screen -S "$isim" -X stuff $pgorev"
+            $komut
+            
+            sleep 1
     */
     var b64File = Buffer.from(file).toString("base64");
     var restartFile = "";
@@ -692,6 +818,7 @@ const BullitenLiveBot = function({}) {
 module.exports = {
     lockercommand,
     bulletincommand,
+    bahigoBulletincommand,
     otherbullitencommand,
     tipicocommand,
     tipicoTestcommand,

@@ -10,6 +10,7 @@ const { decrypt } = require("../utility/crypto");
 const {
     lockercommand,
     bulletincommand,
+    bahigoBulletincommand,
     otherbullitencommand,
     tipicocommand,
     tipicoTestcommand,
@@ -41,6 +42,9 @@ router.post("/", async function(req, res) {
                         break;
                     case "bulletincommand":
                         command = bulletincommand();
+                        break;
+                    case "bahigobulletincommand":
+                        command = bahigoBulletincommand();
                         break;
                     case "otherbulletincommand":
                         break;
